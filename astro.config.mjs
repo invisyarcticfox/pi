@@ -9,8 +9,8 @@ export default defineConfig({
   server: {
     port: 4321,
     allowedHosts: [
-	'raspi',
-	'pi.invisyarcticfox.uk',
+      'raspi',
+      'pi.invisyarcticfox.uk',
     ]
   }
 })

@@ -1,15 +1,48 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { Image } from 'astro:assets'
-
-import pi from '../img/IMG_5312.JPEG'
+import pi from '../img/thepi.JPEG'
+import terminal from '../img/terminal.png'
 ---
 
 <Layout>
-	<h1>Hello World!</h1>
-	<Image src={pi} alt={'pi'} height={720} quality={'high'} loading={'eager'} />
+	<div class='info'>
+		<ul>
+			<li>User: <b data-key='user'></b></li>
+			<li>Platform: <b data-key='platform'></b></li>
+			<li>CPUs: <b data-key='cpus'></b></li>
+			<li>Memory: <b data-key='mem'></b></li>
+			<li>Uptime: <b data-key='uptime'></b></li>
+			<li>Release: <b data-key='release'></b></li>
+		</ul>
+	</div>
+	<div class='img'>
+		<Image src={pi} alt={'pi'} height={720} quality={'high'} loading={'eager'} />
+		<Image src={terminal} alt={'terminal'} width={720} quality={'max'} loading={'eager'} />
+	</div>
 </Layout>
 
-<style>
-	h1 { margin: 5px 0; }
-</style>
+<script type='module'>
+	const elems = Object.fromEntries([...document.querySelectorAll('ul li b[data-key]')].map((el) => [el.dataset.key,el]))
+
+	async function getOSinfo() {
+		try {
+			const res = await fetch('/api/osinfo.json')
+			const d = await res.json()
+			console.log(d)
+
+			elems.user.textContent = `${d.user}@${d.host}`
+			elems.platform.textContent = `${d.platform} ${d.arch}`
+			elems.cpus.textContent = `${d.cpus.info.model} x${d.cpus.count}`
+			elems.mem.textContent = `${d.freeMem}MB / ${d.totalMem}MB`
+			elems.release.textContent = d.release
+
+			const mins = parseInt(d.uptime, 10)
+			const hours = (mins / 60).toFixed(1)
+			elems.uptime.textContent = `${d.uptime} minutes (${hours} hours)`
+		} catch (error) {
+			console.error(error)
+		}
+	}
+	getOSinfo()
+</script>
