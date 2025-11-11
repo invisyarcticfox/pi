@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { Image } from 'astro:assets'
+
+import pi from '../img/IMG_5311.JPEG'
+---
+
+<Layout>
+	<h1>Hello World!</h1>
+	<Image src={pi} alt={'pi'} height={720} quality={'high'} loading={'eager'} />
+</Layout>
+
+<style>
+	h1 { margin: 5px 0; }
+</style>
