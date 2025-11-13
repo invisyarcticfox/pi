@@ -14,35 +14,13 @@ import terminal from '../img/terminal.png'
 			<li>Memory: <b data-key='mem'></b></li>
 			<li>Uptime: <b data-key='uptime'></b></li>
 			<li>Release: <b data-key='release'></b></li>
+			<li>Version: <b data-key='version'></b></li>
 		</ul>
 	</div>
 	<div class='img'>
 		<Image src={pi} alt={'pi'} height={720} quality={'high'} loading={'eager'} />
 		<Image src={terminal} alt={'terminal'} width={720} quality={'max'} loading={'eager'} />
 	</div>
+
+	<script src='../scripts/getOsInfo.ts' />
 </Layout>
-
-<script type='module'>
-	const elems = Object.fromEntries([...document.querySelectorAll('ul li b[data-key]')].map((el) => [el.dataset.key,el]))
-
-	async function getOSinfo() {
-		try {
-			const res = await fetch('/api/osinfo.json')
-			const d = await res.json()
-			console.log(d)
-
-			elems.user.textContent = `${d.user}@${d.host}`
-			elems.platform.textContent = `${d.platform} ${d.arch}`
-			elems.cpus.textContent = `${d.cpus.info.model} x${d.cpus.count}`
-			elems.mem.textContent = `${d.freeMem}MB / ${d.totalMem}MB`
-			elems.release.textContent = d.release
-
-			const mins = parseInt(d.uptime, 10)
-			const hours = (mins / 60).toFixed(1)
-			elems.uptime.textContent = `${d.uptime} minutes (${hours} hours)`
-		} catch (error) {
-			console.error(error)
-		}
-	}
-	getOSinfo()
-</script>

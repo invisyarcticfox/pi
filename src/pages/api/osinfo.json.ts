@@ -1,3 +1,4 @@
+export const prerender = false
 import type { APIRoute } from 'astro'
 import os from 'os'
 
@@ -16,7 +17,7 @@ export const GET:APIRoute = async () => {
     totalMem: ( os.totalmem() / 1024 / 1024 ).toFixed(2),
     release: os.release(),
     version: os.version(),
-    uptime: (os.uptime()/60).toFixed(),
+    uptime: os.uptime(),
   }
 
   return new Response(JSON.stringify(data), {

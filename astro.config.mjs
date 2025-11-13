@@ -6,7 +6,6 @@ import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
   build: { format: 'preserve' },
-  output: 'server',
   trailingSlash: 'never',
   site: 'https://pi.invisyarcticfox.uk',
 
