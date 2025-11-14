@@ -1,6 +1,7 @@
 export const prerender = false
-import type { APIRoute } from 'astro'
 import os from 'os'
+import type { APIRoute } from 'astro'
+import { getCpuTemp, byteToMega } from '../../scripts/utils'
 
 
 export const GET:APIRoute = async () => {
@@ -9,15 +10,11 @@ export const GET:APIRoute = async () => {
     user: os.userInfo().username,
     platform: os.platform(),
     arch: os.arch(),
-    cpus: {
-      info: os.cpus()[0],
-      count: os.cpus().length
-    },
-    freeMem: ( os.freemem() / 1024 / 1024 ).toFixed(2),
-    totalMem: ( os.totalmem() / 1024 / 1024 ).toFixed(2),
+    cpu: { ...os.cpus()[0], temp: getCpuTemp() },
+    memory: { free: byteToMega(os.freemem()), total: byteToMega(os.totalmem()) },
     release: os.release(),
     version: os.version(),
-    uptime: os.uptime(),
+    uptime: os.uptime()
   }
 
   return new Response(JSON.stringify(data), {

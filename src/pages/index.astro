@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { Image } from 'astro:assets'
-import pi from '../img/thepi.JPEG'
+import pi from '../img/thepi.jpeg'
 import terminal from '../img/terminal.png'
 ---
 
@@ -10,15 +10,15 @@ import terminal from '../img/terminal.png'
 		<ul>
 			<li>User: <b data-key='user'></b></li>
 			<li>Platform: <b data-key='platform'></b></li>
-			<li>CPUs: <b data-key='cpus'></b></li>
-			<li>Memory: <b data-key='mem'></b></li>
+			<li>CPU: <b data-key='cpu'></b></li>
+			<li>Memory: <b data-key='mem' title='χ free of 𝑦'></b></li>
 			<li>Uptime: <b data-key='uptime'></b></li>
 			<li>Release: <b data-key='release'></b></li>
 			<li>Version: <b data-key='version'></b></li>
 		</ul>
 	</div>
 	<div class='img'>
-		<Image src={pi} alt={'pi'} height={720} quality={'high'} loading={'eager'} />
+		<Image src={pi} alt={'pi'} height={720} quality={'max'} loading={'eager'} />
 		<Image src={terminal} alt={'terminal'} width={720} quality={'max'} loading={'eager'} />
 	</div>
 
