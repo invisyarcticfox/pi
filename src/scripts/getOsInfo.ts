@@ -1,7 +1,20 @@
 import type { allElems, osInfo } from '../types'
-import { formatUptime } from './utils'
 
-const elems:allElems = Object.fromEntries([...document.querySelectorAll<HTMLElement>('ul li b[data-key]')].map((el) => [el.dataset.key, el]))
+function formatUptime(seconds:number):string {
+  const days = Math.floor(seconds / (3600 * 24))
+  seconds %= (3600 * 24)
+  const hours = Math.floor(seconds / 3600)
+  seconds %= 3600
+  const mins = Math.floor(seconds / 60)
+  const remSecs = Math.floor(seconds % 60)
+
+  const pad = (num:number) => String(num).padStart(2,'0')
+
+  return `${pad(days)}:${pad(hours)}:${pad(mins)}:${pad(remSecs)}`
+}
+
+
+const elems:allElems = Object.fromEntries([...document.querySelectorAll<HTMLElement>('ul li [data-key]')].map((el) => [el.dataset.key, el]))
 
 async function getOsInfo() {
   try {
@@ -9,16 +22,18 @@ async function getOsInfo() {
     const d:osInfo = await res.json()
     console.log(d)
 
-    elems.user.textContent = `${d.user}@${d.host}`
-    elems.platform.textContent = `${d.platform} ${d.arch}`
-    elems.cpu.textContent = `${d.cpu.model} ${(d.cpu.speed / 1000)}GHz (${d.cpu.temp}°C)`
-    elems.release.textContent = d.release
-    elems.version.textContent = d.version
+    elems.cpu.textContent = `(${d.cpuTemp}°C)`
 
+    const disk = {
+      used: (d.disk.used / 1024).toFixed(2),
+      total: (d.disk.total/ 1024).toFixed(2)
+    }
+    elems.disk.innerHTML = `${disk.used}GB / ${disk.total}GB <i>(${d.disk.percent})</i>`
+    
     const usedMem = d.memory.total - d.memory.free
     const percMem = (( usedMem / d.memory.total ) * 100).toFixed()
-    elems.mem.textContent = `${usedMem.toFixed(2)}MB / ${d.memory.total}MB (${percMem}%)`
-
+    elems.mem.innerHTML = `${usedMem.toFixed(2)}MB / ${d.memory.total}MB <i>(${percMem}%)</i>`
+    
     let currUptime = d.uptime
     elems.uptime.textContent = formatUptime(currUptime)
     setInterval(() => { currUptime++, elems.uptime.textContent = formatUptime(currUptime) }, 1000)

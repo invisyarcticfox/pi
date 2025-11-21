@@ -1,0 +1,43 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 60%;
+  min-height: 100vh;
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.info, .img {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-sizing: border-box;
+}
+
+.info {
+  text-align: left;
+  justify-content: center;
+  background: hsl(from var(--bg) h s calc(l * 2));
+}
+
+.img {
+  gap: 1rem;
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+    border: 5px solid var(--acc);
+    box-sizing: border-box;
+  }
+}

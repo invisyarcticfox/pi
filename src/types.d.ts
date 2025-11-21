@@ -1,26 +1,22 @@
 export type osInfo = {
-  host: string
-  user: string
-  platform: string
-  arch: string
-  cpu: {
-    model: string
-    speed: number
-    times: { user:number, nice:number, sys:number, idle:number, irq:number, }
-    temp: string
-  }
+  cpuTemp: number
   memory: { free:number, total:number }
-  release: string
-  version: string
+  disk: {
+    percent: string
+    source: string
+    total: number
+    used: number
+  }
   uptime: number
 }
-
 export type allElems = {
-  user: HTMLElement
-  platform: HTMLElement
   cpu: HTMLElement
+  disk: HTMLElement
   mem: HTMLElement
   uptime: HTMLElement
-  release: HTMLElement
-  version: HTMLElement
 }
+
+
+export type TempEntry = { timestamp:Date|string, temp:number }
+export type DayObj = { [key:string]: TempEntry[] | undefined }
+export type Data = { currentDayIndex:number, days:DayObj[] }

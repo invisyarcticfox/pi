@@ -1,25 +1,38 @@
 ---
+export const prerender = false
 import Layout from '../layouts/Layout.astro'
 import { Image } from 'astro:assets'
 import pi from '../img/thepi.jpeg'
 import terminal from '../img/terminal.png'
+import '../styles/index.scss'
 ---
 
 <Layout>
 	<div class='info'>
 		<ul>
-			<li>User: <b data-key='user'></b></li>
-			<li>Platform: <b data-key='platform'></b></li>
-			<li>CPU: <b data-key='cpu'></b></li>
-			<li>Memory: <b data-key='mem' title='χ free of 𝑦'></b></li>
-			<li>Uptime: <b data-key='uptime'></b></li>
-			<li>Release: <b data-key='release'></b></li>
-			<li>Version: <b data-key='version'></b></li>
+			<li>User: <b>lucas@raspi</b></li>
+			<li>Platform: <b>Linux Debian arm64</b></li>
+			<li>CPU: <b>Cortex-A72 1.8GHz <i data-key='cpu'>(00.0°C)</i> </b></li>
+			<li>GPU: <b>Broadcom bcm2711-vc5</b></li>
+			<li>Disk: <b data-key='disk'>0.00GB / 28.51GB <i>(00%)</i> </b></li>
+			<li>Memory: <b data-key='mem' title='χ free of 𝑦'>0000.00MB / 3796.74MB <i>(00%)</i> </b></li>
+			<li>Uptime: <b data-key='uptime' title='days:hours:minutes:seconds'>00:00:00:00</b></li>
+			<li>Release: <b>6.12.47+rpt-rpi-v8</b></li>
+		</ul>
+
+		Cool stuff ive done so far:
+		<ul style='margin-top: 0;'>
+			<li>
+				<a href='https://github.com/invisyarcticfox/pi' target='_blank' rel='noopener noreferrer'>this website</a>
+				(with the help of <a href='https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/' target='_blank' rel='noopener noreferrer'>CF Tunnels</a>)
+			</li>
+			<li><a href='https://github.com/invisyarcticfox/jetspotter' target='_blank' rel='noopener noreferrer'>my jetspotter script</a></li>
+			<li><a href='./temps'>temperature graph over a week</a></li>
 		</ul>
 	</div>
 	<div class='img'>
 		<Image src={pi} alt={'pi'} height={720} quality={'max'} loading={'eager'} />
-		<Image src={terminal} alt={'terminal'} width={720} quality={'max'} loading={'eager'} />
+		<!-- <Image src={terminal} alt={'terminal'} width={720} quality={'max'} loading={'eager'} /> -->
 	</div>
 
 	<script src='../scripts/getOsInfo.ts' />
