@@ -43,7 +43,5 @@ export const GET:APIRoute = async () => {
     uptime: os.uptime()
   }
 
-  return new Response(JSON.stringify(data), {
-    headers: { 'Content-Type': 'application/json' }
-  })
+  return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } })
 }

@@ -18,7 +18,7 @@ const elems:allElems = Object.fromEntries([...document.querySelectorAll<HTMLElem
 
 async function getOsInfo() {
   try {
-    const res = await fetch('/api/osinfo.json')
+    const res = await fetch('/api/osinfo')
     const d:osInfo = await res.json()
     console.log(d)
 
