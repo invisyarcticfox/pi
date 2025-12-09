@@ -1,7 +1,7 @@
-import type { TempEntry, DayObj, Data } from '../types'
+import type { TempEntry, DayObj, TempData } from '../types'
 import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend, Filler, type ChartConfiguration, type ChartItem, type LinearScaleOptions } from 'chart.js'
 import dataJson from '../data/temps.json'
-const data:Data = dataJson
+const data:TempData = dataJson
 
 
 const datasets = data.days.flatMap((dayObj:DayObj, dayIndex:number) => {

@@ -1,5 +1,6 @@
 import type { allElems, osInfo } from '../types'
 
+
 function formatUptime(seconds:number):string {
   const days = Math.floor(seconds / (3600 * 24))
   seconds %= (3600 * 24)
@@ -13,8 +14,8 @@ function formatUptime(seconds:number):string {
   return `${pad(days)}:${pad(hours)}:${pad(mins)}:${pad(remSecs)}`
 }
 
-
 const elems:allElems = Object.fromEntries([...document.querySelectorAll<HTMLElement>('ul li [data-key]')].map((el) => [el.dataset.key, el]))
+
 
 async function getOsInfo() {
   try {
@@ -41,6 +42,5 @@ async function getOsInfo() {
     console.error(error)
   }
 }
-
 
 getOsInfo()

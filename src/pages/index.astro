@@ -1,34 +1,45 @@
 ---
-export const prerender = false
 import Layout from '../layouts/Layout.astro'
+import StatusItem from '../components/StatusItem.astro'
 import { Image } from 'astro:assets'
 import '../styles/index.scss'
+import thePi from '../assets/thepi.jpeg'
 ---
 
 <Layout>
 	<div class='info'>
-		<ul>
-			<li>User: <b>lucas@raspi</b></li>
-			<li>Platform: <b>Linux Debian arm64</b></li>
-			<li>CPU: <b>Cortex-A72 1.8GHz <i data-key='cpu'>(00.0°C)</i> </b></li>
-			<li>GPU: <b>Broadcom bcm2711-vc5</b></li>
-			<li>Disk: <b data-key='disk' title='χ used of 𝑦'>0.00GB / 28.51GB <i>(00%)</i> </b></li>
-			<li>Memory: <b data-key='mem' title='χ used of 𝑦'>0000.00MB / 3796.74MB <i>(00%)</i> </b></li>
-			<li>Uptime: <b data-key='uptime' title='days:hours:minutes:seconds'>00:00:00:00</b></li>
-			<li>Release: <b>6.12.47+rpt-rpi-v8</b></li>
+		<div class='box system'>
+			<ul>
+				<li>User: <b>lucas@raspi</b></li>
+				<li>Platform: <b>Linux Debian arm64</b></li>
+				<li>CPU: <b>Cortex-A72 1.8GHz <i data-key='cpu'>(00.0°C)</i> </b></li>
+				<li>GPU: <b>Broadcom bcm2711-vc5</b></li>
+				<li>Disk: <b data-key='disk' title='χ used of 𝑦'>0.00GB / 28.51GB <i>(00%)</i> </b></li>
+				<li>Memory: <b data-key='mem' title='χ used of 𝑦'>0000.00MB / 3796.74MB <i>(00%)</i> </b></li>
+				<li>Uptime: <b data-key='uptime' title='days:hours:minutes:seconds'>00:00:00:00</b></li>
+				<li>Release: <b>6.12.47+rpt-rpi-v8</b></li>
 		</ul>
 
-		Cool stuff ive done so far:
-		<ul style='margin-top: 0;'>
-			<li>
-				<a href='https://github.com/invisyarcticfox/pi' target='_blank' rel='noopener noreferrer'>this website</a>
-				(with the help of <a href='https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/' target='_blank' rel='noopener noreferrer'>CF Tunnels</a>)
-			</li>
-			<li><a href='https://github.com/invisyarcticfox/jetspotter' target='_blank' rel='noopener noreferrer'>my jetspotter script</a></li>
-			<li><a href='./temps'>temperature graph over a week</a></li>
-		</ul>
+			Cool stuff hosted here:
+			<ul style='margin-top: 0;'>
+				<li>
+					<a href='https://github.com/invisyarcticfox/pi' target='_blank' rel='noopener noreferrer'>this website</a>
+					(with the help of <a href='https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/' target='_blank' rel='noopener noreferrer'>CF Tunnels</a>)
+				</li>
+				<li><a href='https://github.com/invisyarcticfox/jetspotter' target='_blank' rel='noopener noreferrer'>my JetSpotter script</a></li>
+				<li><a href='https://github.com/invisyarcticfox/piBot' target='_blank' rel='noopener noreferrer'>my Discord bot</a></li>
+				<li><a href='https://flightradar24.com' target='_blank' rel='noopener noreferrer'>FR24 ADS-B Receiver</a></li>
+				<li><a href='https://pi-hole.net/' target='_blank' rel='noopener noreferrer'>PiHole ad blocker</a></li>
+			</ul>
+		</div>
+
+		<div class='box uptime'>
+			Service status:
+			<div class='grid' />
+		</div>
 	</div>
-	<div class='img'><Image src={'/thepi.jpeg'} alt={'pi'} width={540} height={720} quality={'max'} loading={'eager'} /></div>
+	<div class='img'><Image src={thePi} alt={'pi'} height={720} quality={'max'} loading={'eager'} /></div>
 
 	<script src='../scripts/getOsInfo.ts' />
+	<script src='../scripts/getUptime.ts' />
 </Layout>

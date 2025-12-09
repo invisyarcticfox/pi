@@ -19,7 +19,6 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
   border-radius: var(--radius);
   box-sizing: border-box;
 }
@@ -27,11 +26,49 @@ main {
 .info {
   text-align: left;
   justify-content: center;
-  background: hsl(from var(--bg) h s calc(l * 2));
+    padding: 1rem;
+  
+  .box {
+    background: hsl(from var(--bg) h s calc(l * 2));
+    padding: 1rem;
+    margin: .5rem 0;
+    border-radius: var(--radius);
+
+    &.system { ul { margin-top: 10px; } }
+
+    &.uptime {
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: .5rem 1rem;
+        margin-top: .5rem;
+        .item {
+          display: flex;
+          align-items: center;
+          gap: .4rem;
+          font-family: monospace;
+          span.status {
+            &.online { color: #40a02b; }
+            &.offline { color: #d20f39; }
+            &.unknown { color: #4c4f69; }
+
+            svg {
+              position: relative;
+              width: 22px;
+              height: 22px;
+              top: 4px;
+              left: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .img {
   gap: 1rem;
+  padding: 1rem;
   img {
     width: 100%;
     height: auto;

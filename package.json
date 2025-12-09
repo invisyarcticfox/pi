@@ -3,10 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "astro": "astro",
     "dev": "astro dev --host --port 1234",
     "build": "astro build",
     "preview": "astro preview --host --port 1234",
-    "astro": "astro"
+    "restart": "rm -rf ./dist && npm run build && sudo systemctl restart astrosite"
   },
   "dependencies": {
     "@astrojs/node": "^9.5.0",

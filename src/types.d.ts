@@ -19,4 +19,11 @@ export type allElems = {
 
 export type TempEntry = { timestamp:Date|string, temp:number }
 export type DayObj = { [key:string]: TempEntry[] | undefined }
-export type Data = { currentDayIndex:number, days:DayObj[] }
+export type TempData = { days:DayObj[] }
+
+export type ServiceStatus = {
+  services: {
+    name: string
+    status: 'online'|'offline'|'unknown'
+  }[]
+}
